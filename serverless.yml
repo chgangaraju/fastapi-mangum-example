@@ -1,0 +1,35 @@
+service: fastapi-mangum-example
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: ${opt:region, 'us-east-1'}
+  stage: ${opt:stage, 'test'}
+  environment:
+    REGION: ${self:provider.region}
+    LOG_LEVEL: ${opt:loglevel, 'INFO'}
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+
+package:
+  exclude:
+    - node_modules/**
+    - venv/**
+    - .direnv/**
+
+
+functions:
+  app:
+    handler: app.main.handler
+    events:
+      - http: ANY /
+      - http:
+          path: /{proxy+}
+          method: ANY
+
+plugins:
+  - serverless-python-requirements
+
+

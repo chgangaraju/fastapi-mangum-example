@@ -1,0 +1,11 @@
+{
+  "name": "fastapi-mangum-example",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {
+    "serverless": "^1.33.1"
+  },
+  "devDependencies": {
+    "serverless-python-requirements": "^4.2.5"
+  }
+}
